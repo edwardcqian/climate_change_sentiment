@@ -20,8 +20,7 @@ Then run in the directory the repo is cloned to:
 
 Download the pre-trained embedding vectors from the Stanford GloVe page and extract it to the repo directory.  
 
-`wget http://nlp.stanford.edu/data/glove.twitter.27B.zip
-unzip glove.twitter.27B.zip`
+`wget http://nlp.stanford.edu/data/glove.twitter.27B.zip && unzip glove.twitter.27B.zip`
 
 Run the model.py script in a terminal which will train the model, output its weights and also test it against the testing set. 
 
