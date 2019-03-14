@@ -1,13 +1,13 @@
 import pandas as pd
 import numpy as np
 from keras.models import Model
-from keras.layers import Input, Embedding,SpatialDropout1D, Bidirectional, GRU, CuDNNGRU
+from keras.layers import Input, Embedding,SpatialDropout1D, Bidirectional, GRU
 from keras.layers import Conv1D, GlobalAveragePooling1D, GlobalMaxPooling1D, concatenate, Dense, Dropout
 from keras.preprocessing import text, sequence
 from keras.callbacks import EarlyStopping, ModelCheckpoint, Callback
 from sklearn.model_selection import train_test_split
 
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn.metrics import confusion_matrix, accuracy_score
 from utils import clean_text, get_onehot
 
 data = pd.read_csv('data/sample_data.csv')
@@ -72,7 +72,6 @@ gru_input = Input(shape=(maxlen, ))
 x = Embedding(max_features, embed_size, weights=[embedding_matrix],trainable = False)(gru_input)
 x = SpatialDropout1D(0.2)(x)
 x = Bidirectional(GRU(128, return_sequences=True, reset_after=True, recurrent_activation='sigmoid'))(x)
-x = Conv1D(64, kernel_size = 3, padding = "valid", kernel_initializer = "glorot_uniform")(x)
 avg_pool = GlobalAveragePooling1D()(x)
 max_pool = GlobalMaxPooling1D()(x)
 x = concatenate([avg_pool, max_pool]) 
@@ -106,7 +105,6 @@ class_pred = np.argmax(class_prob,axis=1)
 # some basic metrics for accuracy
 print('accuracy score: ' + str(accuracy_score(y_test,class_pred)))
 classes = ['Anti','Neutral','Pro','News']
-print(classification_report(y_test,class_pred, target_names= classes))
 
 # ploting the confusion matrix
 import seaborn as sn
