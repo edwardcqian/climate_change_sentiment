@@ -28,7 +28,7 @@ X_data = data['message']
 X_train, X_test, y_train, y_test = train_test_split(X_data, y, test_size= 0.1, random_state = 1)
 
 # Setup model parameters
-EMBEDDING_FILE = "/home/edward/Documents/work/climate/glove.twitter.27B.200d.txt" # path to embedding file 
+EMBEDDING_FILE = "glove.twitter.27B.200d.txt" # path to embedding file 
 max_features = 20000                           # we are only interested in top 50k most frequently used words
 maxlen = 150                                   # tweets longer than 150 words will be truncated otherwise padded
 embed_size = 200                               # size of each vector (must match the size of the glove embedding)
